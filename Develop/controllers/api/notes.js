@@ -7,13 +7,14 @@ const {
 const { v4: uuidv4 } = require('uuid');
 
 router.get('/', (req, res) => {
-    console.log('request recieved');
-    readFromFile('./db/db.json').then((data) => 
-    res.json(JSON.parse(data)));
+    console.log('Get request recieved');
+    readFromFile('./db/db.json').then((data) => {
+      console.log(JSON.parse(data));
+      res.json(JSON.parse(data))});
 });
 
 router.post('/', (req, res) => {
-    console.log('request recieved');
+    console.log('Post request recieved');
     console.log(req.body);
 
     const { title, text } = req.body;
