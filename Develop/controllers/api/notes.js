@@ -1,4 +1,4 @@
-const api = require('express').Router();
+const router = require('express').Router();
 const { 
     readFromFile,
     readAndAppend,
@@ -6,13 +6,13 @@ const {
 
 const { v4: uuidv4 } = require('uuid');
 
-api.get('/notes', (req, res) => {
+router.get('/', (req, res) => {
     console.log('request recieved');
     readFromFile('./db/db.json').then((data) => 
     res.json(JSON.parse(data)));
 });
 
-api.post('/notes', (req, res) => {
+router.post('/', (req, res) => {
     console.log('request recieved');
     console.log(req.body);
 
@@ -31,8 +31,8 @@ api.post('/notes', (req, res) => {
     };
 });
 
-api.delete('/notes/:id', (req, res) => {
+router.delete('/notes/:id', (req, res) => {
     console.log('request recieved');
 });
 
-module.exports = api;
+module.exports = router;
