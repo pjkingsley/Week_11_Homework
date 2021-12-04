@@ -32,8 +32,16 @@ router.post('/', (req, res) => {
     };
 });
 
-router.delete('/notes/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     console.log('request recieved');
+    const tipId = re.params.tip_id;
+    readFromFile('./db/tips.json')
+      .then((data) => JSON.parse(data))
+      .then((json) => {
+        const result = json.filter((tip) => tip.tip_id !== tipId);
+        writeToFile('./db/tips.json', result);
+        res.json('as you wish');
+      });
 });
 
 module.exports = router;
